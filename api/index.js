@@ -5,6 +5,7 @@ const authRoute = require('./routes/auth.js')
 const usersRoute = require('./routes/users.js')
 const hotelsRoute = require('./routes/hotels.js')
 const roomsRoute = require('./routes/rooms.js')
+const cookieParser = require('cookie-parser')
 const app = express();
 dotenv.config()
 
@@ -27,7 +28,8 @@ mongoose.connection.on('connected', () => {
 })
 
 // middleware
-app.use(express.json());
+app.use(cookieParser())
+app.use(express.json({limit:"50mb"}));
 
 app.use('/api/auth', authRoute)
 app.use('/api/users', usersRoute)
